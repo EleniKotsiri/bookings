@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex items-center justify-center p-1 text-lg leading-none rounded-full w-9 h-9 group-hover:bg-gray-200
                     {{$date === $day->timestamp ? 'bg-gray-200' : '' }}">
-                    {{ $day->format('d') }}
+                        {{ $day->format('d') }}
                 </div>
             </button>
         @endforeach

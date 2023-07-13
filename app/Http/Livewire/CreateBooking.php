@@ -4,18 +4,23 @@ namespace App\Http\Livewire;
 
 use App\Models\Employee;
 use App\Models\Service;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class CreateBooking extends Component
 {
     public $employees;
 
+    // initial state (part of the form)
     public $state = [
         'service' => '',
         'employee' => '',
-        'time' => ''
+        'time' => '', // timestamp
+        'fullname' => '',
+        'email' => '' 
     ];
 
+    // initialize employees (as empty collection)
     public function mount()
     {
         $this->employees = collect();
@@ -25,12 +30,18 @@ class CreateBooking extends Component
         'updated-booking-time' => 'setTime'
     ];
 
+    public function createBooking()
+    {
+        dd($this->state);
+    }
+
     public function setTime($time)
     {
         $this->state['time'] = $time;
     }
 
     // updated() ->state.service
+    // you can choose an employee when you have selected a service first
     public function updatedStateService($serviceId)
     {
         $this->state['employee'] = '';
@@ -41,7 +52,7 @@ class CreateBooking extends Component
         }
 
         $this->clearTime();
-
+        // grab the employees of that selected Service
         $this->employees = $this->selectedService->employees;
     }
 
@@ -73,8 +84,19 @@ class CreateBooking extends Component
         return Employee::find($this->state['employee']);
     }
 
+    public function getHasDetailsToBookProperty()
+    {
+        return $this->state['service'] && $this->state['employee'] && $this->state['time'];
+    }
+
+    public function getTimeObjectProperty()
+    {
+        return Carbon::createFromTimestamp($this->state['time']);   
+    }
+
     public function render()
     {
+        // grab services
         $services = Service::get();
 
         return view('livewire.create-booking', [

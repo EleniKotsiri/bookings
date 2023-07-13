@@ -43,6 +43,7 @@ class BookingCalendar extends Component
             return collect();
         }
         // availableTimeSlots(arg1, arg2) from Employee.php model
+        // $this->employeeSchedule we get from getEmployeeScheduleProperty() just above
         return $this->employee->availableTimeSlots($this->employeeSchedule, $this->service);
     }
 
