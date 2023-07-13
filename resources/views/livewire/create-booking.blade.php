@@ -50,12 +50,24 @@
                     <label for="fullname" class="inline-block mb-2 font-bold text-gray-700 ">Your fullname</label>
                     <input type="text" name="fullname" id="fullname" class="w-full h-10 bg-white border-none rounded-lg"
                     wire:model.defer="state.fullname">
+
+                    @error('state.fullname')
+                        <div class="font-semibold text-red-500 text-sm mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="inline-block mb-2 font-bold text-gray-700 ">Your email</label>
                     <input type="text" name="email" id="email" class="w-full h-10 bg-white border-none rounded-lg"
                     wire:model.defer="state.email">
+
+                    @error('state.email')
+                        <div class="font-semibold text-red-500 text-sm mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
             </div>

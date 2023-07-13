@@ -30,8 +30,20 @@ class CreateBooking extends Component
         'updated-booking-time' => 'setTime'
     ];
 
+    protected function rules()
+    {
+        return [
+            'state.service' => "required|exists:services,id", //needs to exist in services db table
+            'state.employee' => "required|exists:employees,id",
+            'state.time' => "required|numeric",
+            'state.fullname' => "required|string",
+            'state.email' => "required|email"
+        ];
+    }
+
     public function createBooking()
     {
+        $this->validate();
         dd($this->state);
     }
 
