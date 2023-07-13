@@ -17,7 +17,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="bg-[#204060]">
     {{ $slot }}
     @livewireScripts
 </body>

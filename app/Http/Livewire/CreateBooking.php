@@ -56,14 +56,15 @@ class CreateBooking extends Component
             'client_email' => $this->state['email']
         ];
 
-        // dd($bookingFields);
-
         $appointment = Appointment::make($bookingFields);
 
         $appointment->service()->associate($this->selectedService); // service_id
         $appointment->employee()->associate($this->selectedEmployee);
 
         $appointment->save();
+
+
+        return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
     }
 
     public function setTime($time)
