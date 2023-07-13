@@ -30,7 +30,8 @@ class Employee extends Model
 
     public function appointmentsForDate(Carbon $date)
     {
-        return $this->appointments()->whereDate('date', $date)->get();
+        // show dates that are not cancelled (.29)
+        return $this->appointments()->notCancelled()->whereDate('date', $date)->get();
     }
 
     /**
