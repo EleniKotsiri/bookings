@@ -36,6 +36,11 @@ class Appointment extends Model
         });
     }
 
+    // return true if the booking is cancelled
+    public function isCancelled() {
+        return !is_null($this->cancelled_at);
+    }
+
     public function scopeNotCancelled(Builder $builder) {
         $builder->whereNull('cancelled_at');
     }
